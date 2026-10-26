@@ -1,0 +1,258 @@
+/* =========================================================
+   All live animations. Imported last in App.jsx.
+   ========================================================= */
+
+@property --s {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 14px;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ---------- Navbar ---------- */
+.navbar {
+  border-bottom: 1px solid transparent;
+  transition: background 0.3s ease, backdrop-filter 0.3s ease,
+    padding 0.3s ease, border-color 0.3s ease;
+}
+
+.navbar--scrolled {
+  padding-top: 16px;
+  padding-bottom: 16px;
+  background: rgba(0, 0, 0, 0.65);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border-bottom-color: rgba(0, 229, 160, 0.18);
+}
+
+.navbar__dot {
+  animation: statusPulse 1.8s ease-in-out infinite;
+}
+
+@keyframes statusPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(0, 229, 160, 0.6), 0 0 10px var(--accent); }
+  50%      { box-shadow: 0 0 0 8px rgba(0, 229, 160, 0), 0 0 14px var(--accent); }
+}
+
+/* ---------- Hero: canvases ---------- */
+.hero__particles {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.hero__globe-canvas {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 60vh;
+  pointer-events: none;
+}
+
+.hero__glow {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 80vw;
+  height: 40vh;
+  transform: translateX(-50%);
+  background: radial-gradient(ellipse at 50% 100%, rgba(0, 229, 160, 0.22), transparent 70%);
+  pointer-events: none;
+  animation: glowPulse 5s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.45; }
+  50%      { opacity: 1; }
+}
+
+/* ---------- Hero: glitching background word ---------- */
+.hero__bg-text {
+  animation: glitch 7s infinite;
+}
+
+@keyframes glitch {
+  0%, 90%, 100% {
+    transform: translate(-50%, -50%);
+    color: rgba(255, 255, 255, 0.03);
+    text-shadow: none;
+  }
+  91% {
+    transform: translate(calc(-50% + 8px), -50%);
+    color: rgba(255, 255, 255, 0.07);
+    text-shadow: -5px 0 rgba(0, 229, 160, 0.3), 5px 0 rgba(255, 0, 80, 0.15);
+  }
+  93% {
+    transform: translate(calc(-50% - 7px), calc(-50% + 3px));
+    text-shadow: 5px 0 rgba(0, 229, 160, 0.3), -5px 0 rgba(255, 0, 80, 0.15);
+  }
+  95% {
+    transform: translate(calc(-50% + 3px), calc(-50% - 2px));
+    color: rgba(255, 255, 255, 0.05);
+  }
+}
+
+/* ---------- Hero: vertical lines with traveling data dots ---------- */
+.hero__line::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 10px var(--accent);
+  transform: translateX(-50%);
+  animation: travel 4s linear infinite;
+}
+
+.hero__line--2::after { animation-duration: 5.5s; animation-delay: -2s; }
+.hero__line--3::after { animation-duration: 7s;   animation-delay: -4s; }
+
+@keyframes travel {
+  0%   { top: 0;    opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+/* ---------- Hero: terminal ---------- */
+.hero__terminal {
+  height: 172px;
+  overflow: hidden;
+}
+
+.hero__blink {
+  animation: blink 1s steps(1) infinite;
+}
+
+/* ---------- Hero: title typing ---------- */
+.hero__title {
+  position: relative;
+  display: inline-block;
+}
+
+.hero__title-ghost {
+  visibility: hidden; /* reserves the final width so the text doesn't jump */
+}
+
+.hero__title-typed {
+  position: absolute;
+  left: 0;
+  top: 0;
+  white-space: pre;
+}
+
+.hero__cursor {
+  vertical-align: -0.06em;
+  margin-left: 6px;
+  animation: blink 1s steps(1) infinite;
+}
+
+/* ---------- Hero: entrance + tagline ---------- */
+.hero__eyebrow { animation: fadeUp 0.8s ease 0.2s both; }
+.hero__tagline { animation: fadeUp 0.8s ease 1.6s both; }
+.hero__btn     { animation: fadeUp 0.8s ease 2s both; }
+
+.hero__word {
+  transition: color 0.35s ease, text-shadow 0.35s ease;
+}
+
+.hero__word.is-active {
+  color: var(--accent);
+  text-shadow: 0 0 14px rgba(0, 229, 160, 0.6);
+}
+
+/* ---------- Hero: button brackets ---------- */
+.hero__btn {
+  transition: --s 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hero__btn:hover {
+  --s: 24px;
+}
+
+.hero__btn span {
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.hero__btn:hover span {
+  transform: translateX(6px);
+}
+
+/* ---------- Hero: side text ---------- */
+.hero__side li {
+  opacity: 0;
+  animation: fadeUp 0.6s ease forwards;
+  animation-delay: calc(var(--i) * 0.15s + 1.2s);
+}
+
+.hero__side::after {
+  animation: linePulse 2.4s ease-in-out infinite;
+}
+
+@keyframes linePulse {
+  0%, 100% { width: 26px; opacity: 0.45; }
+  50%      { width: 46px; opacity: 1; }
+}
+
+/* ---------- Hero: scroll indicator ---------- */
+.hero__scroll-line {
+  transform-origin: top;
+  animation: scrollDrop 2s ease-in-out infinite;
+}
+
+@keyframes scrollDrop {
+  0%   { transform: scaleY(0); transform-origin: top; }
+  50%  { transform: scaleY(1); transform-origin: top; }
+  51%  { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+
+/* ---------- Scroll reveal ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s ease var(--delay, 0ms), transform 0.7s ease var(--delay, 0ms);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------- About ---------- */
+.about__card-title::after {
+  content: '▍';
+  margin-left: 4px;
+  color: var(--accent);
+  animation: blink 1s steps(1) infinite;
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
