@@ -1,0 +1,94 @@
+/* ===== Dark green theme (imported last, overrides everything) ===== */
+:root {
+  --bg: #020806;
+  --text: #e9fff6;
+  --muted: #7fa395;
+  --accent: #00e5a0;
+}
+
+/* Near-black background with a soft green glow at the bottom only */
+body {
+  background:
+    radial-gradient(ellipse 70% 40% at 50% 105%, rgba(0, 229, 160, 0.16), transparent 70%),
+    radial-gradient(ellipse 50% 30% at 50% 0%, rgba(0, 229, 160, 0.05), transparent 70%),
+    linear-gradient(180deg, #010403 0%, #020a07 55%, #03120d 100%);
+  background-attachment: fixed;
+}
+
+/* Very faint grid */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(0, 229, 160, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 229, 160, 0.035) 1px, transparent 1px);
+  background-size: 56px 56px;
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 20%, transparent 80%);
+  mask-image: radial-gradient(ellipse at center, #000 20%, transparent 80%);
+}
+
+/* Hero */
+.hero__glow {
+  background: radial-gradient(ellipse at 50% 100%, rgba(0, 229, 160, 0.2), transparent 70%);
+}
+
+/* Bigger, brighter globe so the dots are clearly visible */
+.hero__globe-canvas {
+  height: 75vh;
+  filter: brightness(1.9) drop-shadow(0 0 10px rgba(0, 229, 160, 0.5));
+}
+
+.hero__terminal {
+  background: rgba(0, 0, 0, 0.55);
+  border-color: rgba(0, 229, 160, 0.4);
+  box-shadow: 0 0 20px rgba(0, 229, 160, 0.08);
+}
+
+.hero__bg-text {
+  color: rgba(0, 229, 160, 0.035);
+}
+
+@keyframes glitch {
+  0%, 90%, 100% {
+    transform: translate(-50%, -50%);
+    color: rgba(0, 229, 160, 0.035);
+    text-shadow: none;
+  }
+  91% {
+    transform: translate(calc(-50% + 8px), -50%);
+    color: rgba(0, 229, 160, 0.08);
+    text-shadow: -5px 0 rgba(0, 229, 160, 0.3), 5px 0 rgba(255, 255, 255, 0.1);
+  }
+  93% {
+    transform: translate(calc(-50% - 7px), calc(-50% + 3px));
+    text-shadow: 5px 0 rgba(0, 229, 160, 0.3), -5px 0 rgba(255, 255, 255, 0.1);
+  }
+  95% {
+    transform: translate(calc(-50% + 3px), calc(-50% - 2px));
+    color: rgba(0, 229, 160, 0.06);
+  }
+}
+
+/* About */
+.about {
+  background: transparent;
+  border-top-color: rgba(0, 229, 160, 0.18);
+}
+
+.about__text {
+  color: #b9d3c8;
+}
+
+.about__card {
+  background: rgba(0, 0, 0, 0.55);
+  border-color: rgba(0, 229, 160, 0.4);
+  box-shadow: 0 0 24px rgba(0, 229, 160, 0.06);
+}
+
+/* Navbar */
+.navbar--scrolled {
+  background: rgba(1, 6, 4, 0.8);
+}

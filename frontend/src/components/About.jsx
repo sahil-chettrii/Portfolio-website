@@ -1,4 +1,6 @@
 import '../style/About.css';
+import Reveal from './Reveal';
+import ScrambleText from './ScrambleText';
 
 const profile = [
   { key: 'name', value: 'Sahil Chettri' },
@@ -13,19 +15,20 @@ export default function About() {
     <section id="about" className="about">
       <div className="about__inner">
         <h2 className="about__heading">
-          <span className="about__heading-prefix">//</span> About me
+          <span className="about__heading-prefix">//</span>
+          <ScrambleText text="About me" />
         </h2>
 
         <div className="about__grid">
-          <div className="about__text">
+          <Reveal className="about__text">
             <p>
-              I'm Sahil, a developer who builds web applications and then tries
+              I'm Sahil Chettri, a developer who builds web applications and then tries
               to break them. Knowing how an attacker thinks makes me write
               safer code from the first line.
             </p>
             <p>
               I work with React and Node.js on the web side, and I spend my
-              free time on ethical hacking, security labs and open source
+              free time on ethical hacking, security labs , and advance linux script and open source
               projects.
             </p>
             <p>
@@ -35,9 +38,9 @@ export default function About() {
             <a href="#contact" className="about__link">
               Get in touch
             </a>
-          </div>
+          </Reveal>
 
-          <div className="about__card" aria-label="Profile summary">
+          <Reveal className="about__card" delay={150} aria-label="Profile summary">
             <div className="about__card-bar">
               <span className="about__card-title">whoami</span>
             </div>
@@ -49,7 +52,7 @@ export default function About() {
                 </div>
               ))}
             </dl>
-          </div>
+          </Reveal>
         </div>
       </div>
     </section>
